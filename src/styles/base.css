@@ -1,0 +1,418 @@
+/* ============================================================
+   CASCADE RESIDENCES — Design tokens & base
+   Semantic class names, intentionally Webflow-portable.
+   ============================================================ */
+
+:root {
+  /* Surfaces */
+  --bone: #f6f3ec;
+  --bone-2: #efeae0;
+  --limestone: #e2ded4;
+  --sand: #d8c8ae;
+  --ink: #191e1c;
+  --ink-2: #212725;
+
+  /* Text */
+  --text: #191e1c;
+  --text-soft: #5b625f;
+  --text-mute: #8d938f;
+  --text-invert: #f6f3ec;
+  --text-invert-soft: rgba(246, 243, 236, 0.66);
+
+  /* Accent */
+  --deep-sea: #1f4a52;
+  --ocean: #6fa9a5;
+
+  /* Lines */
+  --line: rgba(25, 30, 28, 0.14);
+  --line-strong: rgba(25, 30, 28, 0.28);
+  --line-invert: rgba(246, 243, 236, 0.18);
+
+  /* Type */
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --pad: clamp(20px, 5.2vw, 104px);
+  --section-y: clamp(84px, 10.5vw, 190px);
+  --max: 1720px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bone);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body.is-locked {
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--deep-sea);
+  color: var(--bone);
+}
+
+/* ---------------- Typography ---------------- */
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.018em;
+  margin: 0;
+}
+.display--hero {
+  font-size: clamp(44px, 7.4vw, 118px);
+  line-height: 0.98;
+}
+.display--xl {
+  font-size: clamp(38px, 5.4vw, 94px);
+}
+.display--lg {
+  font-size: clamp(32px, 3.9vw, 62px);
+}
+.display--md {
+  font-size: clamp(25px, 2.5vw, 40px);
+  line-height: 1.12;
+}
+.display em,
+.display .italic {
+  font-style: italic;
+}
+
+.lede {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(20px, 1.95vw, 30px);
+  line-height: 1.48;
+  letter-spacing: -0.005em;
+  color: var(--text);
+  margin: 0;
+}
+
+.body-text {
+  font-size: clamp(14.5px, 1vw, 16.5px);
+  line-height: 1.82;
+  color: var(--text-soft);
+  font-weight: 300;
+  margin: 0;
+}
+.body-text + .body-text {
+  margin-top: 1.5em;
+}
+
+.label {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin: 0;
+}
+
+.caption {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+/* ---------------- Layout ---------------- */
+
+.section {
+  padding-block: var(--section-y);
+  position: relative;
+}
+/* Two plain sections in a row: their paddings would stack into one large
+   empty band with no colour change to mark it; the first one’s bottom
+   padding alone separates them, and the section-head rule marks the break. */
+.section:not(.surface-tint):not(.surface-dark) + .section:not(.surface-tint):not(.surface-dark) {
+  padding-top: 0;
+}
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+.container--wide {
+  max-width: none;
+  padding-inline: var(--pad);
+}
+
+.surface-dark {
+  background: var(--ink);
+  color: var(--text-invert);
+}
+.surface-dark .body-text {
+  color: var(--text-invert-soft);
+}
+.surface-dark .label,
+.surface-dark .caption {
+  color: rgba(246, 243, 236, 0.45);
+}
+.surface-dark .lede {
+  color: var(--text-invert);
+}
+
+.surface-tint {
+  background: var(--bone-2);
+}
+
+/* ---------------- Section index header ---------------- */
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: clamp(36px, 4vw, 64px);
+}
+.section-head__index {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  color: var(--text-mute);
+  flex: none;
+}
+.section-head__rule {
+  height: 1px;
+  background: var(--line);
+  flex: 1 1 auto;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.4s var(--ease-out-expo) 0.15s;
+}
+.is-visible .section-head__rule,
+.section-head.is-visible .section-head__rule {
+  transform: scaleX(1);
+}
+.surface-dark .section-head__rule {
+  background: var(--line-invert);
+}
+.section-head__label {
+  flex: none;
+}
+
+/* ---------------- Buttons & links ---------------- */
+
+.btn {
+  --btn-fg: var(--text);
+  --btn-bg: transparent;
+  --btn-line: var(--line-strong);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 17px 38px;
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--btn-fg);
+  border: 1px solid var(--btn-line);
+  background: var(--btn-bg);
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.6s var(--ease), border-color 0.6s var(--ease);
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--text);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.6s var(--ease-out-expo);
+  z-index: -1;
+}
+.btn:hover {
+  color: var(--bone);
+  border-color: var(--text);
+}
+.btn:hover::before {
+  transform: scaleY(1);
+}
+.btn--light {
+  --btn-fg: var(--bone);
+  --btn-line: rgba(246, 243, 236, 0.4);
+}
+.btn--light::before {
+  background: var(--bone);
+}
+.btn--light:hover {
+  color: var(--ink);
+  border-color: var(--bone);
+}
+.btn--solid {
+  --btn-fg: var(--bone);
+  --btn-bg: var(--ink);
+  --btn-line: var(--ink);
+}
+.btn--solid::before {
+  background: var(--deep-sea);
+}
+.btn--solid:hover {
+  color: var(--bone);
+  border-color: var(--deep-sea);
+}
+.btn--block {
+  width: 100%;
+}
+
+.link-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  padding-bottom: 6px;
+  position: relative;
+}
+.link-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.4;
+  transform-origin: right;
+  transition: transform 0.6s var(--ease-out-expo), opacity 0.4s;
+}
+.link-line:hover::after {
+  transform: scaleX(0);
+}
+.link-line__arrow {
+  transition: transform 0.6s var(--ease-out-expo);
+}
+.link-line:hover .link-line__arrow {
+  transform: translateX(6px);
+}
+
+/* ---------------- Reveal animations ---------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 1.15s var(--ease-out-expo), transform 1.15s var(--ease-out-expo);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-media {
+  overflow: hidden;
+  position: relative;
+}
+.reveal-media > img,
+.reveal-media > .reveal-media__img {
+  transform: scale(1.14);
+  transition: transform 1.8s var(--ease-out-expo), opacity 1.2s var(--ease);
+  will-change: transform;
+}
+.reveal-media.is-visible > img,
+.reveal-media.is-visible > .reveal-media__img {
+  transform: scale(1);
+}
+.reveal-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--bone);
+  transform-origin: bottom;
+  transition: transform 1.5s var(--ease-out-expo);
+  z-index: 1;
+}
+.reveal-media.is-visible::after {
+  transform: scaleY(0);
+}
+.surface-dark .reveal-media::after {
+  background: var(--ink);
+}
+
+.line-mask {
+  display: block;
+  overflow: hidden;
+  /* Cormorant descenders (g, y, p) fall below the line box. With a tight
+     line-height, overflow:hidden would clip them — so extend the clip area
+     downward and pull the layout back up by the same amount. */
+  padding-bottom: 0.22em;
+  margin-bottom: -0.22em;
+}
+.line-mask > span {
+  display: block;
+  /* Must clear the padded clip area above, hence >100%. */
+  transform: translateY(135%);
+  transition: transform 1.3s var(--ease-out-expo);
+}
+.is-visible .line-mask > span {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .reveal-media > img,
+  .line-mask > span,
+  .section-head__rule {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .reveal-media::after {
+    display: none;
+  }
+}

@@ -1,0 +1,119 @@
+/*
+ * Large screens (1800px+). Below that the layout is unchanged.
+ * The base scale caps out around 1740px, which left 2K/4K screens with a
+ * narrow column and tiny type; this widens the column and keeps type growing.
+ * Selectors are prefixed with `html` so they outrank component rules
+ * regardless of the order the bundler emits the stylesheets in.
+ */
+@media (min-width: 1800px) {
+  :root {
+    --max: 2000px;
+    --pad: clamp(104px, 5.6vw, 150px);
+    --section-y: clamp(190px, 9.6vw, 250px);
+  }
+
+  /* Type scale keeps following the viewport, with higher ceilings. */
+  html .display--hero {
+    font-size: clamp(118px, 6.4vw, 172px);
+  }
+  html .display--xl {
+    font-size: clamp(94px, 4.9vw, 132px);
+  }
+  html .display--lg {
+    font-size: clamp(62px, 3.3vw, 88px);
+  }
+  html .display--md {
+    font-size: clamp(40px, 2.1vw, 54px);
+  }
+  html .lede {
+    font-size: clamp(30px, 1.55vw, 40px);
+  }
+  html .body-text {
+    font-size: clamp(16.5px, 0.8vw, 20px);
+  }
+  html .label,
+  html .caption,
+  html .section-head__index,
+  html .btn,
+  html .link-line,
+  html .header__link {
+    font-size: clamp(10.5px, 0.52vw, 13px);
+  }
+
+  html .header__logo {
+    width: clamp(126px, 6.6vw, 168px);
+  }
+  html .header.is-solid .header__logo {
+    width: clamp(102px, 5.2vw, 134px);
+  }
+
+  /* Component details that used fixed pixel sizes */
+  html .rooms__label {
+    font-size: clamp(28px, 1.55vw, 38px);
+  }
+  html .rooms__index {
+    width: min(32%, 460px);
+  }
+  html .rooms__num,
+  html .amenity__index,
+  html .gallery-page__filter-count {
+    font-size: 12px;
+  }
+  html .amenity__name {
+    font-size: clamp(25px, 1.35vw, 34px);
+  }
+  html .amenity__text {
+    font-size: clamp(13.5px, 0.68vw, 17px);
+  }
+  html .apartment-plan__feature,
+  html .ownership__point {
+    font-size: clamp(14.5px, 0.74vw, 18px);
+  }
+  html .floor-plans__facts dd {
+    font-size: clamp(15px, 0.76vw, 19px);
+  }
+  html .floor-plans__note,
+  html .apartment-plan__note {
+    font-size: clamp(12px, 0.6vw, 15px);
+  }
+  html .furniture__tagline {
+    font-size: clamp(20px, 1.05vw, 26px);
+  }
+  html .gallery-page__filter {
+    font-size: clamp(24px, 1.3vw, 32px);
+  }
+
+  /* Full-width 16:9 viewers would outgrow the screen height; cap them so the
+     selectors and the whole image fit in one view. */
+  html .rooms__viewer,
+  html .amenities__viewer,
+  html .tour__frame {
+    max-height: 80vh;
+  }
+
+  /* Enquiries form: let the fields grow with the panel */
+  html .contact__form {
+    max-width: clamp(520px, 30vw, 760px);
+  }
+  html .field__label {
+    font-size: clamp(10px, 0.5vw, 12.5px);
+  }
+  html .field__input,
+  html .contact__email,
+  html .footer__email {
+    font-size: clamp(15px, 0.78vw, 19px);
+  }
+  html .contact__note,
+  html .footer__disclaimer {
+    font-size: clamp(11px, 0.55vw, 13.5px);
+  }
+}
+
+@media (min-width: 2300px) {
+  :root {
+    --max: 2320px;
+  }
+  html .gallery-page__grid {
+    columns: 4;
+  }
+}

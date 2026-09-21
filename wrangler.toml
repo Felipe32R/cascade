@@ -1,0 +1,17 @@
+name = "cascade-residences"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-09-01"
+
+# Leads from the contact form. Run `npx wrangler d1 create cascade-leads`
+# once and paste the returned id below before deploying.
+[[d1_databases]]
+binding = "DB"
+database_name = "cascade-leads"
+database_id = "38b32739-7b2f-47c5-9fb4-1f72b22c6baa"
+migrations_dir = "migrations"
+
+[vars]
+# Resend's shared test sender only delivers to your own Resend account email.
+# Once a domain is verified in Resend, change this to e.g.
+# "Cascade Residences <brochure@your-domain.com>".
+EMAIL_FROM = "Cascade Residences <onboarding@resend.dev>"

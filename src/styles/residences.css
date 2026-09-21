@@ -1,0 +1,198 @@
+.residences__heading {
+  margin: 0 0 clamp(28px, 3.6vw, 56px);
+}
+.residences__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 96px);
+  align-items: start;
+  margin-bottom: clamp(52px, 7vw, 110px);
+}
+/* Full-width viewer with the room index laid vertically over its left edge. */
+.rooms {
+  position: relative;
+}
+.rooms__viewer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--ink);
+}
+.rooms__viewer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgba(14, 19, 18, 0.62) 0%,
+    rgba(14, 19, 18, 0.34) 24%,
+    rgba(14, 19, 18, 0) 46%
+  );
+}
+.rooms__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 1s var(--ease), transform 1.6s var(--ease-out-expo);
+}
+.rooms__image.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.rooms__index {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: clamp(24px, 3.4vw, 56px);
+  transform: translateY(-50%);
+  width: min(34%, 340px);
+}
+.rooms__hint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  color: rgba(246, 243, 236, 0.75);
+}
+.rooms__hint::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sand);
+  animation: rooms-pulse 2.4s ease-in-out infinite;
+}
+@keyframes rooms-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.7); }
+}
+.rooms__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(246, 243, 236, 0.22);
+}
+.rooms__item {
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  gap: clamp(12px, 1.4vw, 22px);
+  padding: clamp(9px, 1vw, 15px) 0;
+  border-bottom: 1px solid rgba(246, 243, 236, 0.22);
+  text-align: left;
+  color: rgba(246, 243, 236, 0.6);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: color 0.5s var(--ease);
+}
+.rooms__item:hover {
+  color: rgba(246, 243, 236, 0.9);
+}
+.rooms__item.is-active {
+  color: var(--bone);
+}
+.rooms__item.is-active .rooms__num {
+  opacity: 1;
+  color: var(--sand);
+}
+.rooms__num {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  flex: none;
+  opacity: 0.7;
+}
+.rooms__label {
+  font-size: clamp(18px, 1.8vw, 28px);
+  font-weight: 300;
+  line-height: 1.1;
+}
+.rooms__item.is-active .rooms__label {
+  font-style: italic;
+}
+
+@media (max-width: 900px) {
+  .residences__intro {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  /* Too narrow to overlay: the index becomes a row of tabs above the image. */
+  .rooms {
+    display: grid;
+    gap: 18px;
+  }
+  .rooms__viewer::after {
+    display: none;
+  }
+  .rooms__index {
+    position: static;
+    transform: none;
+    width: auto;
+  }
+  .rooms__hint {
+    color: var(--text-mute);
+  }
+  .rooms__item.is-active .rooms__num {
+    color: inherit;
+  }
+  .rooms__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 20px;
+    border-top: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .rooms__item {
+    width: auto;
+    padding: 12px 0;
+    margin-bottom: -1px;
+    border-bottom: 1px solid transparent;
+    color: var(--text-mute);
+    text-shadow: none;
+  }
+  .rooms__item:hover,
+  .rooms__item.is-active {
+    color: var(--text);
+  }
+  .rooms__item.is-active {
+    border-bottom-color: var(--text);
+  }
+}
+
+/* Furniture package, spotlighted in the second text column */
+.furniture {
+  padding-left: clamp(18px, 2vw, 32px);
+  border-left: 1px solid var(--sand);
+}
+.furniture__eyebrow {
+  margin: 0;
+  color: var(--text-mute);
+}
+.furniture__heading {
+  margin: 10px 0 0;
+  font-weight: 300;
+}
+.furniture__tagline {
+  margin: 12px 0 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(17px, 1.35vw, 20px);
+  line-height: 1.4;
+}
+.furniture .body-text {
+  margin-top: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rooms__hint::before {
+    animation: none;
+  }
+}

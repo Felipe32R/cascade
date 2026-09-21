@@ -1,0 +1,3 @@
+# Force the brochure link (sent in the brochure email) to download instead of opening in the browser.
+/brochure/cascade-residences-brochure.pdf
+  Content-Disposition: attachment; filename="Cascade-Residences-Brochure.pdf"

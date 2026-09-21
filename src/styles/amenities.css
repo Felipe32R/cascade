@@ -1,0 +1,120 @@
+.amenities__heading {
+  max-width: 14ch;
+}
+.amenities__showcase {
+  margin-top: clamp(36px, 5vw, 72px);
+}
+
+.amenities__viewer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--limestone);
+}
+.amenities__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 1s var(--ease), transform 1.6s var(--ease-out-expo);
+}
+.amenities__image.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Items run across above the image; the active one gets a rule along its bottom edge. */
+.amenities__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+.amenities__list li + li {
+  border-left: 1px solid var(--line);
+}
+.amenity {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: clamp(18px, 2vw, 28px) clamp(14px, 1.6vw, 24px) clamp(22px, 2.4vw, 32px);
+  text-align: left;
+  color: var(--text-mute);
+  cursor: pointer;
+  transition: color 0.5s var(--ease), background 0.6s var(--ease);
+}
+.amenity::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--ocean);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s var(--ease-out-expo);
+}
+.amenity:hover {
+  color: var(--text);
+}
+.amenity.is-active {
+  color: var(--text);
+  background: var(--bone-2);
+}
+.amenity.is-active::before {
+  transform: scaleX(1);
+}
+.amenity__index {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  opacity: 0.7;
+}
+.amenity.is-active .amenity__index {
+  color: var(--ocean);
+  opacity: 1;
+}
+.amenity__name {
+  font-size: clamp(19px, 1.6vw, 25px);
+  font-weight: 300;
+  line-height: 1.15;
+}
+.amenity.is-active .amenity__name {
+  font-style: italic;
+}
+.amenity__text {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: inherit;
+  opacity: 0.85;
+}
+
+/* Narrow screens: keep it horizontal as a swipeable row. */
+@media (max-width: 900px) {
+  .amenities__list {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .amenities__list::-webkit-scrollbar {
+    display: none;
+  }
+  .amenities__list li {
+    flex: 0 0 min(68%, 260px);
+    scroll-snap-align: start;
+  }
+  .amenities__viewer {
+    aspect-ratio: 3 / 2;
+  }
+}

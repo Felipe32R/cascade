@@ -1,0 +1,131 @@
+.admin {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding: clamp(32px, 5vw, 72px) var(--pad);
+}
+.admin__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.admin__toolbar {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.admin__search,
+.admin__select {
+  font: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line-strong);
+  padding: 8px 0;
+}
+.admin__search {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.admin__search:focus,
+.admin__select:focus {
+  outline: none;
+  border-color: var(--deep-sea);
+}
+.admin__select--inline {
+  border-bottom-color: transparent;
+  padding: 2px 0;
+}
+.admin__count {
+  margin-left: auto;
+  color: var(--text-mute);
+}
+.admin__error {
+  margin: 20px 0 0;
+  color: #9a3b2e;
+  font-size: 14px;
+}
+.admin__table-wrap {
+  margin-top: 24px;
+}
+.admin__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.admin__table th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  padding: 10px 12px 10px 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+.admin__table td {
+  padding: 14px 12px 14px 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.admin__table a {
+  border-bottom: 1px solid var(--line-strong);
+}
+.admin__table tr.is-archived td {
+  color: var(--text-mute);
+}
+.admin__table tr.is-new td:first-child {
+  box-shadow: inset 2px 0 0 var(--deep-sea);
+  padding-left: 10px;
+}
+.admin__empty {
+  padding: 40px 0;
+  color: var(--text-mute);
+}
+
+/* Phones: each lead becomes a stacked card. */
+@media (max-width: 760px) {
+  .admin__table thead {
+    display: none;
+  }
+  .admin__table,
+  .admin__table tbody,
+  .admin__table tr,
+  .admin__table td {
+    display: block;
+  }
+  .admin__table tr {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .admin__table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 4px 0;
+    border: none;
+    overflow-wrap: anywhere;
+  }
+  .admin__table td::before {
+    content: attr(data-label);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    flex-shrink: 0;
+  }
+  .admin__table tr.is-new td:first-child {
+    box-shadow: none;
+    padding-left: 0;
+  }
+  .admin__count {
+    margin-left: 0;
+  }
+}
+.admin__muted {
+  color: var(--text-mute);
+}

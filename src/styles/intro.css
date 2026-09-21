@@ -1,0 +1,28 @@
+.intro__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(32px, 6vw, 110px);
+  align-items: start;
+}
+.intro__heading {
+  max-width: 16ch;
+}
+.intro__body {
+  padding-top: clamp(6px, 1.2vw, 18px);
+  max-width: 58ch;
+}
+.intro__media {
+  margin-top: clamp(56px, 8vw, 128px);
+}
+.figure--full .figure__media {
+  width: 100%;
+}
+@media (max-width: 900px) {
+  .intro__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .intro__heading {
+    max-width: 100%;
+  }
+}
