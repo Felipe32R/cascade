@@ -1,0 +1,17 @@
+.figure {
+  margin: 0;
+}
+.figure__media {
+  width: 100%;
+  overflow: hidden;
+  background: var(--limestone);
+}
+.figure__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.figure__caption {
+  margin-top: 14px;
+  display: block;
+}

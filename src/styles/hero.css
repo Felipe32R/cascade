@@ -1,0 +1,190 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--text-invert);
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+}
+.hero__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.16);
+  transition: transform 2.6s var(--ease-out-expo);
+}
+.hero.is-ready .hero__media video {
+  transform: scale(1.03);
+}
+
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  /* The coastal frame is very bright, so type needs a layered scrim to stay legible. */
+  background:
+    linear-gradient(to bottom, rgba(16, 21, 20, 0.5) 0%, rgba(16, 21, 20, 0.05) 30%),
+    linear-gradient(
+      to top,
+      rgba(14, 19, 18, 0.86) 0%,
+      rgba(14, 19, 18, 0.58) 28%,
+      rgba(14, 19, 18, 0.16) 55%,
+      rgba(14, 19, 18, 0) 76%
+    ),
+    linear-gradient(to right, rgba(14, 19, 18, 0.5) 0%, rgba(14, 19, 18, 0.12) 42%, rgba(14, 19, 18, 0) 68%);
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding: 0 var(--pad) clamp(44px, 6vh, 84px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.hero__content {
+  max-width: min(980px, 76%);
+}
+
+.hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: rgba(246, 243, 236, 0.78);
+  margin-bottom: clamp(20px, 2.4vw, 34px);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 1s var(--ease) 0.15s, transform 1s var(--ease-out-expo) 0.15s;
+}
+.hero.is-ready .hero__eyebrow {
+  opacity: 1;
+  transform: none;
+}
+.hero__eyebrow-rule {
+  width: clamp(28px, 4vw, 64px);
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.hero__title {
+  margin: 0;
+}
+.hero__title .line-mask > span {
+  transition-delay: 0.25s;
+}
+.hero__title .line-mask:last-child > span {
+  transition-delay: 0.4s;
+}
+.hero.is-ready .hero__title .line-mask > span {
+  transform: none;
+}
+
+.hero__tagline {
+  color: rgba(246, 243, 236, 0.86);
+  margin-top: clamp(18px, 2vw, 28px);
+  max-width: 34ch;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 1s var(--ease) 0.65s, transform 1s var(--ease-out-expo) 0.65s;
+}
+.hero.is-ready .hero__tagline {
+  opacity: 1;
+  transform: none;
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 40px);
+  flex-wrap: wrap;
+  margin-top: clamp(30px, 3.4vw, 52px);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 1s var(--ease) 0.8s, transform 1s var(--ease-out-expo) 0.8s;
+}
+.hero.is-ready .hero__actions {
+  opacity: 1;
+  transform: none;
+}
+.hero__link {
+  color: rgba(246, 243, 236, 0.9);
+}
+
+.hero__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+  padding-bottom: 6px;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease) 1s;
+}
+.hero.is-ready .hero__meta {
+  opacity: 1;
+}
+.hero__scroll-line {
+  width: 1px;
+  height: 78px;
+  background: rgba(246, 243, 236, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+.hero__scroll-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(246, 243, 236, 0.9);
+  transform-origin: top;
+  animation: scroll-trace 2.6s var(--ease-out-expo) infinite;
+}
+@keyframes scroll-trace {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero__content {
+    max-width: 100%;
+  }
+  .hero__meta {
+    display: none;
+  }
+  .hero__actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+  }
+}
+
+/* Hide the native play overlay iOS shows when autoplay is blocked (e.g. Low Power Mode). */
+.hero__media video::-webkit-media-controls,
+.hero__media video::-webkit-media-controls-start-playback-button,
+.hero__media video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
